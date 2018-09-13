@@ -13,6 +13,8 @@ mongoose.connect(process.env.DBURL)
 // express app
 const app = express();
 
+// middleware and routes
+require('./server/server')(app);
 
 
 // run the express app

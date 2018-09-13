@@ -3,10 +3,14 @@ const webpack = require('webpack');
 
 
 module.exports = {
-	entry: path.resolve(path.join(__dirname, 'client/index.js')),
+	mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
+	entry: [
+		'webpack-hot-middleware/client',
+		path.resolve(path.join(__dirname, 'client/index.js'))
+	],
 	output: {
-		path: path.resolve(path.join(__dirname, 'build')),
-		publicPath: '/build/',
+		path: path.resolve(path.join(__dirname, 'public')),
+		publicPath: '/public/',
 		filename: 'bundle.js'
 	},
 	module: {
@@ -20,7 +24,7 @@ module.exports = {
 	},
 	plugins: [
 		new webpack.HotModuleReplacementPlugin(),
-		new webpack.NoErrorsPlugin()
+		new webpack.NoEmitOnErrorsPlugin(),
 	],
 	resolve: {
 		extensions: ['*', '.js', 'jsx']
